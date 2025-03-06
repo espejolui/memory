@@ -1,16 +1,9 @@
-# 1. Botón de iniciar -- Ya
-# 2. Generar un número y mostrar -- Ya
-# 3. Guardarlo en una lista -- Ya
-# 4. Borrarlo en pantalla del usuario de la terminal, pero sin salir del juego
-# 5. Pedir que lo dijite luego y guardarlo en una lista
-# 6. Comparar las dos listas, si son iguales repetir el proceso sino, perdiste
-
 import random
 import time
 import os
 import re
 
-color_list = ["verde", "rojo", "amarillo", "naranja"]
+color_list = ["verde", "rojo", "amarillo", "azul"]
 memory_color = []
 
 print("¡Midamos tu memoria!")
@@ -24,7 +17,7 @@ while True:
   memory_color.append(color)
 
   print(" - ".join(memory_color))
-  time.sleep(2)
+  time.sleep(3)
   os.system('cls' if os.name == 'nt' else 'clear')
 
   # Convierte la entrada del usuario a minúsculas y elimina espacios en los extremos
