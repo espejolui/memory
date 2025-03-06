@@ -1,36 +1,22 @@
-import random
-import time
-import os
-import re
+from game.utils import Actions
 
-color_list = ["verde", "rojo", "amarillo", "azul"]
-memory_color = []
+# Con if __name__ == "__main__" → El juego solo se ejecuta si main.py se ejecuta directamente.
+# __name__ es una variable especial que vale main si se ejecuta el archvio principal, pero si es importado se toma el nombre del archivo sin la extensión
+if __name__ == "__main__":
+    game_actions = Actions()  # Crea una instancia de la clase Actions
+    game_actions.play() # Inicia el juego.
+    memory_color = [] # tupla vacía para almacenar los colores generados
+    while True:
+        # invoco la función para genrar el color y lo guardo en una variable
+        color = game_actions.generate_color()
+        # Añado el color generado a la tupla
+        memory_color.append(color)
+        # Muestro los valores de la tupla al usuario
+        game_actions.show_colors(memory_color)
+        # Almaceno el color ingresado por el usuario
+        color_user = game_actions.user_input()
 
-print("¡Midamos tu memoria!")
-time.sleep(.5)
-
-while True:
-  print("Memoriza el siguiente color:\n")
-  time.sleep(1)
-
-  color = random.choice(color_list)
-  memory_color.append(color)
-
-  print(" - ".join(memory_color))
-  time.sleep(3)
-  os.system('cls' if os.name == 'nt' else 'clear')
-
-  # Convierte la entrada del usuario a minúsculas y elimina espacios en los extremos
-  color_user = input("Escribe los colores mostrados: \n").lower().strip()
-
-  # Divide la cadena en una lista usando una expresión regular
-    # r''  -> Indica que es una cadena sin procesar (raw string), evitando problemas con caracteres de escape.
-    # []   -> Define un conjunto de caracteres a buscar.
-    # ,    -> Coincide con la coma como separador.
-    # \s   -> Coincide con cualquier espacio en blanco (espacio, tabulación, salto de línea, etc.).
-    # +    -> Indica que se debe coincidir con uno o más caracteres del conjunto definido ([]).
-  color_user = re.split(r'[,\s]+', color_user)
-
-  if color_user != memory_color:
-    print("Perdiste :(")
-    break
+        # Comparo si las dos tuplas son iguales
+        if color_user != memory_color:
+            print("Perdiste :(")
+            break
